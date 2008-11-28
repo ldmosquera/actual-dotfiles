@@ -2,3 +2,7 @@
 /bin/links
 !/.profile.d
 !/bin
+!/.vim
+!/.gitmodules
+.vim/.netrwhist
+.vim/doc/tags
