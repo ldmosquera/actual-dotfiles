@@ -1,0 +1,81 @@
+#!/bin/bash
+
+#utilidad a base de scriptzofrenia (no eliminar este comentario)
+
+nombreProgramaPrincipal=`which bluetooth`
+nombrePrograma="`basename $0`"
+
+moduloHCI="hci_usb"
+deviceHCI="hci0"
+
+case "$nombrePrograma" in
+	#region bluetooth.activar
+
+	bluetooth.activar) 		#activa bluetooth en modo non-discoverable
+		set -x
+
+		sudo modprobe $moduloHCI
+		sudo hid2hci
+		sudo hciconfig $deviceHCI up
+	
+		;;
+
+	#endregion
+
+	#region bluetooth.desactivar
+
+	bluetooth.desactivar) 		#desactiva bluetooth
+		set -x
+
+		sudo hciconfig $deviceHCI down
+		sudo rmmod $moduloHCI
+		
+		;;
+
+	#endregion
+
+	#region bluetooth.reactivar
+	
+	bluetooth.reactivar) 		#desactiva y luego reactiva bluetooth en modo non-discoverable
+		set -x
+
+		bluetooth.desactivar
+		bluetooth.activar
+
+		;;
+
+	#endregion
+
+	#region bluetooth.discoverable
+
+	bluetooth.discoverable) 		#pone bluetooth en modo discoverable
+		set -x
+
+		sudo hciconfig $device iscan pscan
+
+		;;
+
+	#endregion
+
+	#region bluetooth.nondiscoverable
+
+	bluetooth.nondiscoverable) 		#pone bluetooth en modo discoverable
+		set -x
+
+		sudo hciconfig $device noscan
+
+		;;
+
+	#endregion
+
+	*)
+		cat <<- EOF 1>&2
+		Esta utilidad fue invocada con el nombre "$nombrePrograma", el cual no corresponde a una personalidad valida para la utilidad "$nombreProgramaPrincipal".
+		Personalidades validas para esta utilidad:
+		`scriptzofrenia.listarPersonalidades $nombreProgramaPrincipal`
+		EOF
+		;;
+esac
+
+# vim: set foldmarker=#region,#endregion foldmethod=marker :
+
