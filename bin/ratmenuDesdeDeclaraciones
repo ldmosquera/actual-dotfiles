@@ -1,0 +1,53 @@
+#!/bin/bash
+
+archivoDeDefiniciones="$1"
+
+#region utilidades
+
+declare -a argumentos
+function Item() {
+	argumentos[$((cantidadargumentos++))]="$1"
+	argumentos[$((cantidadargumentos++))]="exec $2"
+}
+
+function Comando() {
+	titulo="$1"; shift
+
+	Item "$titulo" "gnome-terminal -x $*";
+}
+
+function SesionSSH() {
+	hostname=$1; shift
+
+	Item "ssh: $hostname" "gnome-terminal -x ssh -Y $hostname $*";
+}
+
+function SesionVNC() {
+	descripcion="$1"; shift
+	hostname="$1"; shift
+
+	Item "vnc: $descripcion" "vncviewer $hostname $*"
+}
+
+function SesionRDP() {
+	descripcion="$1"; shift
+	hostname="$1"; shift
+
+	Item "rdp: $descripcion" "rdesktop $hostname $*"
+}
+
+#endregion
+
+if [[ -f "$archivoDeDefiniciones" ]]; then
+	source "$archivoDeDefiniciones"
+else
+	Item "error: archivo de definiciones invalido: \"$archivoDeDefiniciones\"" ""
+fi
+
+exec ratmenu	\
+	-label "$archivoDeDefiniciones" \
+	-style "dreary" \
+	"${argumentos[@]}"
+
+# vim: set foldmarker=#region,#endregion foldmethod=marker :
+
