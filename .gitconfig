@@ -1,0 +1,15 @@
+[color]
+	diff = true
+	status = true
+	log = true
+[user]
+	name = Leonardo Mosquera
+	email = ldmosquera@gmail.com
+[gui]
+	spellingdictionary = none
+[alias]
+	wc = whatchanged
+	cp = cherry-pick
+	rb = rebase
+	mt = mergetool -t vimdiff
+	dt = difftool -t vimdiff
