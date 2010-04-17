@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#lee un archivo $ARCHIVO con el siguiente formato:
+#cadena	TAB(S)	destino
+#donde el numero de tabs delimitantes no importa, y devuelve la parte destino
+#de la linea para la cual $1 concuerda con la cadena
+
+#ejemplos de uso, asumiendo que $ARCHIVO contiene una linea "prog	/home/yo/src/":
+#	ir		#mostrar el archivo de datos
+#
+#	ls `ir prog`
+#
+#	cd `ir prog`	#
+#	. ir prog	#estos dos son equivalentes
+#
+#	cd "`ir prog`/	#luego de tipear la barra, y si blah existe en $ARCHIVO, entonces bash autocompleta correctamente la ruta
+
+function compilar() {
+	find $HOME/.ir -type f -exec grep -h -v '^#' {} +
+}
+
+case $# in
+	0) compilar ;;
+	1)
+		expansion=`prefijo --no-estricto "$1" \`compilar \| campo 0\``
+		destino=`compilar | grep "^$expansion" | campo 1`
+
+		cd "$destino" 2>/dev/null
+		echo "$destino"
+
+		unset destino
+
+		;;
+
+	*) cat <<EOF
+Error de parametros.
+usos:
+`basename $0`            (lista definiciones)
+`basename $0` <cadena>   (cambia a <cadena>)
+EOF
+		;;
+esac
+
