@@ -1,0 +1,66 @@
+#!/bin/bash
+
+#region personalizacion del shell
+
+colorDelHostEnElPrompt="33m" #amarillo
+
+#prompt con el host resaltado con color
+PS1='\u@\[\033[1;'$colorDelHostEnElPrompt'\]\h\[\033[0m\]:\w'
+unset colorDelHostEnElPrompt
+if [[ "`id -u`" -eq 0 ]]; then
+	PS1=$PS1'# '
+else
+	PS1=$PS1'$ '
+fi
+
+shopt -s checkwinsize
+shopt -s nocaseglob
+export HISTCONTROL="ignoredups"
+export HISTTIMEFORMAT="%T  "
+export HISTSIZE=2500
+
+#para hacer que screen use bash
+export SHELL
+
+export EDITOR="vim"
+
+complete -c sudo
+complete -f sudo
+
+#endregion
+#region path
+
+#poner ~/bin, y cada subdirectorio, en PATH:
+if [[ -d ~/bin ]] ; then
+	ifsAnterior="$IFS"
+	IFS=$'\n'
+
+	for d in `find ~/bin -type d -a \! -wholename '*.git/*'`; do
+		PATH="$d:$PATH"
+	done
+	
+	IFS="$ifsAnterior"
+	unset ifsAnterior
+fi
+
+#aplicar exclusiones del path desde un archivo:
+exclusionesDelPath="$HOME/.excluirDelPath.conf"
+if [[ -f "$exclusionesDelPath" ]]; then
+	PATH="`echo $PATH | tr : '\n' | grep -v -f <(grep -v -e '^#' -e '^[[:blank:]]*$' $exclusionesDelPath) | tr '\n' :`"
+fi
+unset exclusionesDelPath
+
+export PATH
+
+#endregion
+#region definiciones externas
+
+directorioDefiniciones="$HOME/.profile.d"
+if [[ -d "$directorioDefiniciones" ]]; then
+	for archivo in "$directorioDefiniciones"/*; do
+		. "$archivo"
+	done
+fi
+
+#endregion
+
