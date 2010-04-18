@@ -1,0 +1,3 @@
+[submodule "bin/ruby"]
+	path = bin/ruby
+	url = beta:/net/leo/contenido/personal/codigo/utilidadesRuby.git
