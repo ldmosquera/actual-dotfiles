@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export MPLAYER_VERBOSE=0
+
+mplayer -ss 1 -zoom -nostop-xscreensaver -vo gl2 -fs -nosound -loop 0 -msglevel "all=0" "$@"
+
