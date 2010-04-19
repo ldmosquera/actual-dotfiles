@@ -1,0 +1,8 @@
+#!/bin/bash
+
+servidor=snow
+
+for cliente in beta exo; do
+	ssh $cliente bash <<< "killall synergy{c,s}; DISPLAY=:0 synergyc $servidor"
+done
+
