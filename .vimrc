@@ -24,6 +24,8 @@ au BufNewFile,BufRead *.config set filetype=xml
 au BufNewFile,BufRead *.bas set filetype=basic
 au BufNewFile,BufRead *.cls set filetype=basic
 
+autocmd BufNewFile,BufRead *.pure.erb set filetype=html.eruby
+
 set history=1000
 
 filetype plugin on
