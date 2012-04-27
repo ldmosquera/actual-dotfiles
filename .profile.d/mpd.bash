@@ -1,6 +1,7 @@
 export MPD_HOST='nieve'
 
 alias musica='ncmpc -c'
+alias m='musica'
 
 function mpc_pausarDespuesDeEsta() {
 	remanenteDeCancionActual=`mpc | awk -F"[ /:]" '/playing/ {print 60*($8-$6)+$9-$7}'`
