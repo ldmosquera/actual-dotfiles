@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#imprime la fecha en formato AAAA-MM-DD
+
+date +"%Y-%m-%d"

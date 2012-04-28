@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#descarga recursivamente una URL
+
+wget -r -np -U asd "$@"

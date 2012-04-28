@@ -1,0 +1,42 @@
+#!/usr/bin/perl
+
+if ($#ARGV < 1)
+{
+	die(<<EOF);
+Error de parametros.
+Uso:
+	prefijo                 <prefijoBuscado> <posibilidad>...
+	prefijo --no-estricto   <prefijoBuscado> <posibilidad>...
+EOF
+}
+
+
+#region procesar opciones
+
+$opcionNoEstricto = '^(--no-estricto|-n)$';
+
+$estricto = 1 unless grep(/$opcionNoEstricto/, @ARGV);
+@ARGV = grep(!/$opcionNoEstricto/, @ARGV);
+
+#endregion
+
+$prefijoABuscar = shift @ARGV;
+@posibilidades = @ARGV;
+
+@resultados = grep(/^$prefijoABuscar/i, @posibilidades);
+
+if (@resultados == 0)
+{
+	exit 2;
+}
+elsif (@resultados == 1)
+{
+	print "$resultados[0]\n";
+	exit 1;
+}
+else
+{
+	print "$resultados[0]\n" unless $estricto;
+	exit 0;
+}
+

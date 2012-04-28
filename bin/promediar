@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#recibe una serie de lineas, asume que son numeros y los promedia
+
+awk '{n++; s+=$0} END {printf "%.2f",s/n}'

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#imprime la hora en formato HH.MM
+
+date +%T | sed 's/:/\./g'

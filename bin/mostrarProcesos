@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#muestra procesos, y opcionalmente filtra por linea de comando
+
+if grep -qi cygwin <<< `uname`; then
+	comandoListado='ps -af'
+else
+	comandoListado='ps -AF'
+fi
+
+$comandoListado | {
+	#opcionalmente filtrar
+	if [[ "$1" ]]; then
+		grep -v grep | grep -i $1
+	else
+		cat
+	fi
+}
+

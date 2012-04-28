@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#si hay argumentos, imprime cada uno en una linea separada
+#si no hay argumentos, concatena las palabras de cada linea de entrada en una misma linea de salida
+#"las palabras" significa que inserta espacios entre lineas porque asume palabras
+
+IFS=$'\n'
+if [ "$#" = 0 ]; then
+	for i in `< /dev/stdin`; do
+		echo -n "$i"" "
+	done
+	echo ""
+else
+	for i; do echo $i; done
+fi
+

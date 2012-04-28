@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#busca subcadenas en nombres de archivos y directorios, recursivamente
+#ejemplos:
+#	buscar midocumento.txt
+#	buscar midocumento.txt misdocumentos.txt  'mi documento.txt''''
+
+for i in $@; do
+	find . -iname \*$i\*
+done | sort -u

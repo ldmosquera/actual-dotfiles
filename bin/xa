@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#NOTA: xargs -I requiere GNU xargs
+
+xargs -d \\n -I {} echo $@

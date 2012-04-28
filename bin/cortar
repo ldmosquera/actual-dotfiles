@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+
+$#ARGV == 1 or
+	die(<<EOF);
+Error de argumentos.
+Uso:
+	cortar <delimitador> <rango>
+EOF
+
+($separador, $rango) = ($ARGV[0], $ARGV[1]);
+
+while (<STDIN>) {
+	chomp;
+
+	my (@campos) = grep(!/^$/, split(/$separador/));
+	print join($separador, eval('@campos[' . $rango . ']'));
+	print "\n";
+}
+

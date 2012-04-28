@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#cambia permisos de archivos y/o carpetas recursivamente
+
+if [[ $# -ne 1 ]] && [[ $# -ne 2 ]]; then
+	cat <<EOF
+	echo "Uso: $0 PERMISOARCHIVOS { PERMISODIRECTORIOS }"
+	echo Reemplaza recursivamente los permisos de los archivos y directorios desde el directorio actual
+EOF
+	exit 1
+fi
+
+find . -type f -exec chmod $1 \{\} \+
+
+if [ $2 ]; then
+	find . -type d -exec chmod $2 \{\} \+
+fi
+

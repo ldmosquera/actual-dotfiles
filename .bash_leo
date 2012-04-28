@@ -16,8 +16,8 @@ fi
 shopt -s checkwinsize
 shopt -s nocaseglob
 export HISTCONTROL="ignoredups"
-export HISTTIMEFORMAT="%T  "
-export HISTSIZE=2500
+export HISTTIMEFORMAT="%Y-%m-%d %T  "
+export HISTSIZE=50000
 
 #para hacer que screen use bash
 export SHELL

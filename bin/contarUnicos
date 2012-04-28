@@ -1,0 +1,9 @@
+#!/usr/bin/awk -f
+
+{
+	cuenta[$0]++;
+}
+END {
+	for (i in cuenta)
+		printf "%d\t%s\n",cuenta[i],i;
+}

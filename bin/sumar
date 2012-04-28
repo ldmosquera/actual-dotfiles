@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#recibe una serie de lineas, asume que son numeros y los suma
+
+awk '{i+=$0} END {printf "%.2f\n",i}'

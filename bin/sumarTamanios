@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#para cada ruta en stdin, ejecuta du -s y ordena los resultados por tamanio, y adicionalmente muestra el total en varias unidades
+
+IFS=$'\n'
+du -s `< /dev/stdin` | cortar $'\t' 1 | awk 'BEGIN {i=0} {i=i+$0} END {print i/1024," MB"}'
