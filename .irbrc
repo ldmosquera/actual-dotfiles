@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'wirble'
+require 'awesome_print'
+
 Wirble.init
 Wirble.colorize
 
@@ -20,4 +22,20 @@ module IRB
 	   self.result_format = ''
 	end
 end  
+
+
+#configurar awesome_print por defecto para IRB
+unless IRB.version.include?('DietRB')
+	IRB::Irb.class_eval do
+		def output_value
+			ap(@context.last_value, :indent => -4)
+		end
+	end
+else # MacRuby
+	IRB.formatter = Class.new(IRB::Formatter) do
+		def inspect_object(object)
+			object.ai
+		end
+	end.new
+end
 
