@@ -2,4 +2,4 @@
 
 #descarga recursivamente una URL
 
-wget -r -np -U asd "$@"
+wget -r -np -c --save-headers --header\="Accept-Encoding: gzip,deflate" "$@"
