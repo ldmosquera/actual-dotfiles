@@ -24,6 +24,9 @@ au BufNewFile,BufRead *.config set filetype=xml
 au BufNewFile,BufRead *.bas set filetype=basic
 au BufNewFile,BufRead *.cls set filetype=basic
 
+au BufNewFile,BufRead *.idl set filetype=thrift
+au BufNewFile,BufRead *.json set filetype=javascript
+
 autocmd BufNewFile,BufRead *.pure.erb set filetype=html.eruby
 
 set history=1000
