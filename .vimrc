@@ -33,3 +33,5 @@ set history=1000
 
 filetype plugin on
 
+nnoremap <leader>; :tabprevious<CR>
+nnoremap <leader>' :tabnext<CR>
