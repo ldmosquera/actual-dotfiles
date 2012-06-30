@@ -1,4 +1,4 @@
-shell -${SHELL}
+shell /bin/bash
 startup_message off
 
 hardstatus on
