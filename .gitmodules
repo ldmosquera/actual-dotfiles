@@ -1,3 +1,6 @@
 [submodule "bin/ruby"]
 	path = bin/ruby
 	url = beta:/net/leo/contenido/personal/codigo/utilidadesRuby.git
+[submodule ".config/awesome/blingbling"]
+	path = .config/awesome/blingbling
+	url = git://github.com/cedlemo/blingbling.git
