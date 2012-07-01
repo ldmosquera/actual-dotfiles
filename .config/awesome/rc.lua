@@ -123,7 +123,21 @@ vicious.register(memGraph, vicious.widgets.mem, '$1', 1)
 
 diskStats = widget({ type = "textbox", width=100 })
 diskStats.width = 175 
-vicious.register(diskStats, vicious.widgets.dio, '<span color="#ffffff" size="small">sda: ${sda read_kb} KB - ${sda write_kb} KB</span>', 1)
+vicious.register(diskStats, vicious.widgets.dio,
+'<span color="#ffffff" size="small">sda: ${sda read_kb} KB - ${sda write_kb} KB</span>', 1)
+
+-- }}}
+
+-- {{{ Net graph
+
+netStat = widget({ type = "textbox", name = 'netstat' })
+netStat.width = 150
+vicious.register(netStat, vicious.widgets.net,
+	'<span color="#ffffff" size="small">eth0: ${eth0 down_kb} KB - ${eth0 up_kb} KB</span>', 1)
+
+-- FIXME: antes de activar, se debe usar netstat -n en blingbling
+-- blingbling.popups.netstat(netStat,
+-- 	{ title_color = "#ffffff", established_color = "#ffffff", listen_color = "#999999" })
 
 -- }}}
 
@@ -209,6 +223,7 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
+		netStat,
 		diskStats,
 		memGraph.widget,
 		cpuGraph.widget,
