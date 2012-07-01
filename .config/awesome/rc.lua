@@ -104,6 +104,9 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" }, "%Y-%m-%d %H:%M %a ")
 
+separator = widget({ type = "textbox" })
+separator.text = "    "
+
 -- {{{ system status widgets
 
 -- {{{ CPU graph
@@ -135,6 +138,14 @@ memGraph:set_show_text(true)
 memGraph:set_label("mem: $percent %")
 memGraph:set_rounded_size(0.6)
 vicious.register(memGraph, vicious.widgets.mem, '$1', 1)
+
+-- }}}
+
+-- {{{ Disk graph
+
+diskStats = widget({ type = "textbox", width=100 })
+diskStats.width = 175 
+vicious.register(diskStats, vicious.widgets.dio, '<span color="#ffffff" size="small">sda: ${sda read_kb} KB - ${sda write_kb} KB</span>', 1)
 
 -- }}}
 
@@ -220,6 +231,8 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
+		separator,
+		diskStats,
 		memGraph.widget,
 		cpuGraph.widget,
         mytasklist[s],
