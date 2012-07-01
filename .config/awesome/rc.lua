@@ -111,16 +111,13 @@ mytextclock = awful.widget.textclock({ align = "right" }, "%Y-%m-%d %H:%M %a ")
 cpuGraph = blingbling.classical_graph.new()
 cpuGraph:set_font_size(8)
 cpuGraph:set_height(16)
+cpuGraph:set_h_margin(2)
 cpuGraph:set_width(150)
+cpuGraph:set_filled(true)
 cpuGraph:set_show_text(true)
 cpuGraph:set_label("CPU: $percent %")
-cpuGraph:set_graph_color("#00ccff00")
---Use transparency on graph line color to reduce the width of line with low resolution screen
 cpuGraph:set_graph_line_color("#ff330088")
-cpuGraph:set_filled(true)
-cpuGraph:set_h_margin(2)
-cpuGraph:set_background_color("#00000044")
-cpuGraph:set_filled_color("#00000099")
+cpuGraph:set_graph_color("#7A1900")
 cpuGraph:set_rounded_size(0.6)
 vicious.register(cpuGraph, vicious.widgets.cpu, '$1',1)
 
@@ -136,13 +133,7 @@ memGraph:set_width(150)
 memGraph:set_filled(true)
 memGraph:set_show_text(true)
 memGraph:set_label("mem: $percent %")
-memGraph:set_filled_color("#00000099")
 memGraph:set_rounded_size(0.6)
---We just want the line of the graph
-memGraph:set_graph_color("#00ccff00")
---Use transparency on graph line color to reduce the width of line with low resolution screen
-memGraph:set_graph_line_color("#00ccff88")
-memGraph:set_background_color("#00000044")
 vicious.register(memGraph, vicious.widgets.mem, '$1', 1)
 
 -- }}}
