@@ -108,15 +108,12 @@ mytextclock = awful.widget.textclock({ align = "right" }, "%Y-%m-%d %H:%M %a ")
 
 -- {{{ CPU graph
 
-cpuGraph_label = widget({ type = "textbox" })
-cpuGraph_label.text = "CPU: "
-
 cpuGraph = blingbling.classical_graph.new()
 cpuGraph:set_font_size(8)
 cpuGraph:set_height(16)
 cpuGraph:set_width(150)
 cpuGraph:set_show_text(true)
-cpuGraph:set_label("Load: $percent %")
+cpuGraph:set_label("CPU: $percent %")
 cpuGraph:set_graph_color("#00ccff00")
 --Use transparency on graph line color to reduce the width of line with low resolution screen
 cpuGraph:set_graph_line_color("#ff330088")
@@ -131,9 +128,6 @@ vicious.register(cpuGraph, vicious.widgets.cpu, '$1',1)
 
 -- {{{ Mem graph
 
-memGraph_label = widget({ type = "textbox" })
-memGraph_label.text = "MEM: "
-
 memGraph = blingbling.classical_graph.new()
 memGraph:set_font_size(8)
 memGraph:set_height(16)
@@ -141,6 +135,7 @@ memGraph:set_h_margin(2)
 memGraph:set_width(150)
 memGraph:set_filled(true)
 memGraph:set_show_text(true)
+memGraph:set_label("mem: $percent %")
 memGraph:set_filled_color("#00000099")
 memGraph:set_rounded_size(0.6)
 --We just want the line of the graph
@@ -148,7 +143,7 @@ memGraph:set_graph_color("#00ccff00")
 --Use transparency on graph line color to reduce the width of line with low resolution screen
 memGraph:set_graph_line_color("#00ccff88")
 memGraph:set_background_color("#00000044")
-vicious.register(memGraph, vicious.widgets.mem, "$1", 1)
+vicious.register(memGraph, vicious.widgets.mem, '$1', 1)
 
 -- }}}
 
@@ -235,9 +230,7 @@ for s = 1, screen.count() do
         mytextclock,
         s == 1 and mysystray or nil,
 		memGraph.widget,
-		memGraph_label,
 		cpuGraph.widget,
-		cpuGraph_label,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
