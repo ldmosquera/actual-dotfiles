@@ -203,12 +203,12 @@ for s = 1, screen.count() do
         {
             mytaglist[s],
             mypromptbox[s],
+			separator,
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
-		separator,
 		diskStats,
 		memGraph.widget,
 		cpuGraph.widget,
