@@ -87,6 +87,69 @@ separator.text = "    "
 
 -- {{{ system status widgets
 
+-- {{{ popups
+
+-- {{{ utils
+
+-- URL: http://lua-users.org/wiki/SplitJoin
+local function split(str, delim, maxNb)
+    -- Eliminate bad cases...
+    if string.find(str, delim) == nil then
+        return { str }
+    end
+    if maxNb == nil or maxNb < 1 then
+        maxNb = 0    -- No limit
+    end
+    local result = {}
+    local pat = "(.-)" .. delim .. "()"
+    local nb = 0
+    local lastPos
+    for part, pos in string.gfind(str, pat) do
+        nb = nb + 1
+        result[nb] = part
+        lastPos = pos
+        if nb == maxNb then break end
+    end
+    -- Handle the last field
+    if nb ~= maxNb then
+        result[nb + 1] = string.sub(str, lastPos)
+    end
+    return result
+end
+
+local function colorizeTitle(text)
+	firstNewline = string.find(text, "\n")
+	return	'<span color="#FFFFFF">' ..
+				string.sub(text, 1, firstNewline-1) ..
+			'</span>' ..
+			string.sub(text, firstNewline, -1)
+end
+
+-- }}}
+
+local popups = {}
+local function hide_popup(widget)
+	if popups[widget] ~= nil then
+		 naughty.destroy(popups[widget])
+		 popups[widget] = nil
+	end
+end
+local function addPopup(widget, getTextFunction)
+	widget:add_signal("mouse::enter", function()
+		hide_popup(widget)
+		popups[widget] =
+			naughty.notify({
+				text = colorizeTitle(getTextFunction()),
+				timeout = 0, hover_timeout = 0.5,
+			})
+	end)
+	widget:add_signal("mouse::leave", function()
+		hide_popup(widget)
+	end)
+end
+
+-- }}}
+
 -- {{{ CPU graph
 
 cpuGraph = blingbling.classical_graph.new()
@@ -102,6 +165,11 @@ cpuGraph:set_graph_color("#7A1900")
 cpuGraph:set_rounded_size(0.6)
 vicious.register(cpuGraph, vicious.widgets.cpu, '$1',1)
 
+addPopup(cpuGraph.widget,
+	function ()
+		return awful.util.pread(os.getenv("HOME") .. '/bin/local/listProcessorUsage')
+	end)
+
 -- }}}
 
 -- {{{ Mem graph
@@ -116,6 +184,11 @@ memGraph:set_show_text(true)
 memGraph:set_label("mem: $percent %")
 memGraph:set_rounded_size(0.6)
 vicious.register(memGraph, vicious.widgets.mem, '$1', 1)
+
+addPopup(memGraph.widget,
+	function ()
+		return awful.util.pread(os.getenv("HOME") .. '/bin/local/listMemoryUsage')
+	end)
 
 -- }}}
 
@@ -135,9 +208,10 @@ netStat.width = 150
 vicious.register(netStat, vicious.widgets.net,
 	'<span color="#ffffff" size="small">eth0: ${eth0 down_kb} KB - ${eth0 up_kb} KB</span>', 1)
 
--- FIXME: antes de activar, se debe usar netstat -n en blingbling
--- blingbling.popups.netstat(netStat,
--- 	{ title_color = "#ffffff", established_color = "#ffffff", listen_color = "#999999" })
+addPopup(netStat,
+	function ()
+		return awful.util.pread(os.getenv("HOME") .. '/bin/local/netstat_pretty')
+	end)
 
 -- }}}
 
