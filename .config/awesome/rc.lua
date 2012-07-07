@@ -154,7 +154,7 @@ end
 
 cpuGraph = blingbling.classical_graph.new()
 cpuGraph:set_font_size(8)
-cpuGraph:set_height(16)
+cpuGraph:set_height(18)
 cpuGraph:set_h_margin(2)
 cpuGraph:set_width(150)
 cpuGraph:set_filled(true)
@@ -176,7 +176,7 @@ addPopup(cpuGraph.widget,
 
 memGraph = blingbling.classical_graph.new()
 memGraph:set_font_size(8)
-memGraph:set_height(16)
+memGraph:set_height(18)
 memGraph:set_h_margin(2)
 memGraph:set_width(150)
 memGraph:set_filled(true)
