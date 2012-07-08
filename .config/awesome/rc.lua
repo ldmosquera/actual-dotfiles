@@ -157,7 +157,7 @@ cpuGraph = blingbling.classical_graph.new()
 cpuGraph:set_font_size(8)
 cpuGraph:set_height(18)
 cpuGraph:set_h_margin(2)
-cpuGraph:set_width(150)
+cpuGraph:set_width(100)
 cpuGraph:set_filled(true)
 cpuGraph:set_show_text(true)
 cpuGraph:set_label("CPU: $percent %")
@@ -179,7 +179,7 @@ memGraph = blingbling.classical_graph.new()
 memGraph:set_font_size(8)
 memGraph:set_height(18)
 memGraph:set_h_margin(2)
-memGraph:set_width(150)
+memGraph:set_width(100)
 memGraph:set_filled(true)
 memGraph:set_show_text(true)
 memGraph:set_label("mem: $percent %")
@@ -196,7 +196,7 @@ addPopup(memGraph.widget,
 -- {{{ Disk graph
 
 diskStats = widget({ type = "textbox", width=100 })
-diskStats.width = 175 
+diskStats.width = 150 
 vicious.register(diskStats, vicious.widgets.dio,
 '<span color="#ffffff" size="small">sda: ${sda read_kb} KB - ${sda write_kb} KB</span>', 1)
 
