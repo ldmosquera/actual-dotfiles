@@ -5,5 +5,5 @@ exec ps -A -o %cpu,command --sort=-%cpu |
 	cut -c 1-100 |
 	sed 's/\&/\&amp;/g' |
 	sed 's/^ *\([^ ]*\) */\1	/' |
-	$HOME/bin/ruby/encolumnar.rb 4
+	$HOME/bin/ruby/encolumnar.rb 8
 

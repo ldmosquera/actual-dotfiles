@@ -141,6 +141,7 @@ local function addPopup(widget, getTextFunction)
 			naughty.notify({
 				text = colorizeTitle(getTextFunction()),
 				timeout = 0, hover_timeout = 0.5,
+				font = 'Ubuntu Mono 9'
 			})
 	end)
 	widget:add_signal("mouse::leave", function()

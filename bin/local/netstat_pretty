@@ -8,7 +8,9 @@
 		grep -v 'TIME_WAIT' |
 		sed 's/off (0.00\/0\/0)/-/g' |
 		tail -n +3 |
-		tr -s ' ' "\t"
+		tr -s ' ' "\t" |
+		#corregir columna de timers
+		sed 's/\(\S*\)\t\((.*\/.*)\)$/\1 \2/'
 } |
 	sed 's/^\(udp.*0\.0\.0\.0:\*.*\)$/\1\t-/g' |
-	$HOME/bin/ruby/encolumnar.rb 4
+	$HOME/bin/ruby/encolumnar.rb 8

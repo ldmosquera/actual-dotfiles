@@ -5,4 +5,4 @@ exec ps -A -o rss,command --sort=-rss |
 	cut -c 1-100 |
 	sed 's/\&/\&amp;/g' |
 	sed 's/^ *\([0-9A-Z]*\) /\1	/' |
-	$HOME/bin/ruby/encolumnar.rb 4
+	$HOME/bin/ruby/encolumnar.rb 8
