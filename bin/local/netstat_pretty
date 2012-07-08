@@ -1,11 +1,12 @@
 #!/bin/sh
 
 {
-	echo "Proto\tRecv-Q\tSend-Q\tLocal Address\tForeign Address\tState\tPID/Program name"
+	echo "Proto\tRecv-Q\tSend-Q\tLocal Address\tForeign Address\tState\tPID/Program name\tTimer"
 
-	netstat -4ntaup 2>/dev/null |
+	netstat -4ntaupo 2>/dev/null |
 		sort -t : -k1 -k2n |
 		grep -v 'TIME_WAIT' |
+		sed 's/off (0.00\/0\/0)/-/g' |
 		tail -n +3 |
 		tr -s ' ' "\t"
 } |
