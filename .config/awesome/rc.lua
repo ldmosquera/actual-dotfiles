@@ -211,7 +211,7 @@ vicious.register(netStat, vicious.widgets.net,
 
 addPopup(netStat,
 	function ()
-		return awful.util.pread(os.getenv("HOME") .. '/bin/local/netstat_pretty')
+		return awful.util.pread('sudo -n ' .. os.getenv("HOME") .. '/bin/local/netstat_pretty')
 	end)
 
 -- }}}
