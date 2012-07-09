@@ -295,12 +295,13 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
-            mytaglist[s],
-            mypromptbox[s],
+			mylayoutbox[s],
 			separator,
+            mytaglist[s],
+			separator,
+            mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
-        mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
 		netStat,
