@@ -118,11 +118,16 @@ local function split(str, delim, maxNb)
 end
 
 local function colorizeTitle(text)
-	firstNewline = string.find(text, "\n")
-	return	'<span color="#FFFFFF">' ..
-				string.sub(text, 1, firstNewline-1) ..
-			'</span>' ..
-			string.sub(text, firstNewline, -1)
+	local firstNewline = string.find(text, "\n")
+
+	if firstNewLine == nil then
+		text =	'<span color="#FFFFFF">' ..
+					string.sub(text, 1, firstNewline-1) ..
+				'</span>' ..
+				string.sub(text, firstNewline, -1)
+	end
+
+	return text
 end
 
 -- }}}
