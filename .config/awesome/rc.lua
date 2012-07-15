@@ -209,7 +209,7 @@ addPopup(memGraph.widget,
 diskStats = widget({ type = "textbox", width=100 })
 diskStats.width = 150 
 vicious.register(diskStats, vicious.widgets.dio,
-'<span color="#ffffff" size="small">sda: ${sda read_kb} KB - ${sda write_kb} KB</span>', 1)
+'<span color="#ffffff" size="small">vda: ${vda read_kb} KB - ${vda write_kb} KB</span>', 1)
 
 -- }}}
 
