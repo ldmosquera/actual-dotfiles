@@ -85,13 +85,6 @@ end
 -- }}}
 
 -- {{{ Wibox
--- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" }, "%Y-%m-%d %H:%M %a ")
-
-separator = widget({ type = "textbox" })
-separator.text = "    "
-
--- {{{ system status widgets
 
 -- {{{ popups
 
@@ -161,6 +154,19 @@ local function addPopup(widget, getTextFunction)
 end
 
 -- }}}
+
+-- Create a textclock widget
+mytextclock = awful.widget.textclock({ align = "right" }, "%Y-%m-%d %H:%M %a ")
+
+addPopup(mytextclock,
+	function ()
+		return awful.util.pread('cal -3 -h')
+	end)
+
+separator = widget({ type = "textbox" })
+separator.text = "    "
+
+-- {{{ system status widgets
 
 -- {{{ CPU graph
 
