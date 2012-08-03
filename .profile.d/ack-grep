@@ -1,0 +1,4 @@
+alias aj='ack-grep --type=java'
+alias ag='ack-grep --type=js'
+alias ags='ag --type-add js=.json'
+
