@@ -2,7 +2,7 @@
 
 #region personalizacion del shell
 
-colorDelHostEnElPrompt="33m" #amarillo
+colorDelHostEnElPrompt="31m" #rojo
 
 #prompt con el host resaltado con color
 PS1='\u@\[\033[1;'$colorDelHostEnElPrompt'\]\h\[\033[0m\]:\w'
